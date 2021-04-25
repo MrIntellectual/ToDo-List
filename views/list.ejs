@@ -3,10 +3,15 @@
   <h1><%= listTitle %></h1>
 </div>
 <div class="box">
-  <% for(let i = 0;i < newListItems.length;i++) { %>
+  <% for(var i = 0;i < newListItems.length;i++) { %>
+	<% console.log(newListItems[i])%>
   <div class="item">
     <input type="checkbox" />
     <p><%= newListItems[i] %></p>
+		<form action="/del" method="post">
+			<input type="text" name="value" style="display:none" value=<%= i %>>
+			<button type="submit" class="delete">-</button>
+		</form>
   </div>
   <% }  %>
   <form class="item" action="/" method="post">

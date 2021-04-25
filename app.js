@@ -2,10 +2,10 @@
 
 const express = require('express');
 const bodyParser = require('body-parser');
-const date = require(__dirname + '/date.js')
+const date = require(__dirname + '/date.js');
 const app = express();
 
-const items = ["Buy Food", "Cook Food", "Eat Food"];
+var items = ["Buy Food", "Cook Food", "Eat Food"];
 const workItems = [];
 
 app.use(bodyParser.urlencoded({
@@ -44,6 +44,22 @@ app.post('/', (req, res) => {
     items.push(item);
     res.redirect('/');
   }
+});
+
+app.post("/del",(req,res) => {
+	const item = items[req.body.value];
+	const itemsArray = items;
+	items = [];
+	var once = false;
+	for (let i = 0; i < itemsArray.length; i++) {
+		if(itemsArray[i] != item || once === true) {
+			items.push(itemsArray[i]);
+		}
+		else {
+			once = true;
+		}
+	}
+	res.redirect('/');
 });
 
 
